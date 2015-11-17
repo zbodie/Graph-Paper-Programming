@@ -60,6 +60,17 @@ function updatePaintBrushIcon() {
     // TODO
     // remove current paint brush
     // place new paint brush at CurrentArrayPosition
+    var allTableCells = $('#the-table').find('td');
+    $.each(allTableCells, function(index, cell) {
+        $(cell).empty();
+    });
+    var cellWidth = $(allTableCells[0]).css('width');
+    var allTableRows = $('#the-table').find('tr');
+    var currentTableRow = allTableRows[CurrentArrayPosition[CUR_ARRAY_Y]];
+    var tableCellsInCurrentRow = $(currentTableRow).find('td');
+    var currentTableCell = tableCellsInCurrentRow[CurrentArrayPosition[CUR_ARRAY_X]];
+    $(currentTableCell).append('<img src="/images/paint-brush-icon.png" width="' + (parseInt(cellWidth,10)-12) 
+                             + '" height="' + (parseInt(cellWidth,10)-12) + '"></img>')
 };
 
 function paintCurrentSquare() {
@@ -91,13 +102,14 @@ function createNewTable(h, w) {
         var newRow = '<tr>';
 
         for(var j = 0; j < w; j++) {
-            newRow += '<td></td>';
+            newRow += '<td style="padding: 0px; text-align: center; padding-top: 5px"></td>';
         }
 
         newRow += '</tr>';
         theTable.append(newRow);
     }
     resizeTableToSquares();
+    updatePaintBrushIcon();
 };
 
 function resizeTableToSquares() {
