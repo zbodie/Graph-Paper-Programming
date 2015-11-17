@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Graph Paper Programming</title>
+        <link rel="stylesheet" href="/css/style.css" />
+        <script type='text/javascript' src='/jquery/dist/jquery.min.js'></script>
+        <link rel="stylesheet" href="/materialize/dist/css/materialize.min.css" />
+        <script type='text/javascript' src='/materialize/dist/js/materialize.min.js'></script>
+        <script type='text/javascript' src='/js/helper-functions.js'></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link type="image/x-icon" href="/images/favicon.png" rel="icon">
+    </head>
+    <body>
+        <div class="row">
+            <div class="col s6 push-s3">
+                <table id="the-table" class="bordered">
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
+
+<script>
+createNewTable(4,4);
+$(document).keyup(function(event) {
+    console.log(event);
+    if(event.keyCode == 37) { // left arrow
+        moveArrayPosition('left');
+    } else if(event.keyCode == 38) { // up arrow
+        moveArrayPosition('up');
+    } else if(event.keyCode == 39) { // right arrow
+        moveArrayPosition('right');
+    } else if(event.keyCode == 40) { // down arrow
+        moveArrayPosition('down');
+    } else if(event.keyCode == 32) { // spacebar
+        paintCurrentSquare();
+    } else if(event.keyCode == 16) { // shift
+        nextPenColor();
+    }
+});
+
+resizeTableToSquares();
+</script>

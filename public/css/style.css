@@ -1,0 +1,7 @@
+table {
+  margin-top: 25px;
+}
+
+table.bordered>tbody>tr>td {
+  border: 1px solid #d0d0d0;
+}
