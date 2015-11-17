@@ -4,9 +4,9 @@ This is an interactive tool for verifying graphs from the Graph Paper Programmin
 
 ## Prerequisites
 This guide assumes you hae the following installed:
-*npm
-*nodejs
-*bower
+* npm
+* nodejs
+* bower
 
 
 ## Building the application
