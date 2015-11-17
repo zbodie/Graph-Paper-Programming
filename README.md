@@ -10,10 +10,10 @@ This guide assumes you hae the following installed:
 
 
 ## Building the application
-After cloning the repository, install npm and bower packages.
-```npm install```
-```bower install```
+After cloning the repository, install npm and bower packages.  
+```npm install```  
+```bower install```  
 
 ## Running the application
-Specifying the port is optional.  If it is not specified, the server will start on port 3004.
+Specifying the port is optional.  If it is not specified, the server will start on port 3004.  
 `node app.js <port>`
