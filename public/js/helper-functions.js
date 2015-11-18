@@ -1,5 +1,5 @@
 var PictureArray = null;
-var PenColors = ['black', 'gray'];
+var PenColors = ['black', 'blue-grey lighten-2'];
 var CurrentPenColor = 0;
 var CurrentArrayPosition = [0,0];
 var CUR_ARRAY_X = 1;
@@ -36,7 +36,7 @@ function moveHorizontally(moveDirection) {
 
     var newX = CurrentArrayPosition[CUR_ARRAY_X] + shift;
     if(newX < 0 || newX >= PictureArray[0].length) {
-        alert('Uh-oh, I cannot go that way without leaving the grid!');
+        Materialize.toast('Uh-oh, I cannot go that way without leaving the grid!', 2000);
     } else {
         CurrentArrayPosition[CUR_ARRAY_X] = newX;
         updatePaintBrushIcon();
@@ -49,7 +49,7 @@ function moveVertically(moveDirection) {
 
     var newY = CurrentArrayPosition[CUR_ARRAY_Y] + shift;
     if(newY < 0 || newY >= PictureArray.length) {
-        alert('Uh-oh, I cannot go that way without leaving the grid!');
+        Materialize.toast('Uh-oh, I cannot go that way without leaving the grid!', 2000);
     } else {
         CurrentArrayPosition[CUR_ARRAY_Y] = newY;
         updatePaintBrushIcon();
@@ -57,25 +57,32 @@ function moveVertically(moveDirection) {
 };
 
 function updatePaintBrushIcon() {
-    // TODO
     // remove current paint brush
-    // place new paint brush at CurrentArrayPosition
     var allTableCells = $('#the-table').find('td');
     $.each(allTableCells, function(index, cell) {
         $(cell).empty();
     });
-    var cellWidth = $(allTableCells[0]).css('width');
+
+    // place new paint brush at CurrentArrayPosition
+    var cellWidth = getCellWidth();
+    var currentTableCell = getCurrentTableCell();
+    $(currentTableCell).append('<img src="/images/paint-brush-icon.png" width="' + (parseInt(cellWidth,10)-15) 
+                             + '" height="' + (parseInt(cellWidth,10)-15) + '"></img>')
+};
+
+function getCurrentTableCell() {
     var allTableRows = $('#the-table').find('tr');
     var currentTableRow = allTableRows[CurrentArrayPosition[CUR_ARRAY_Y]];
     var tableCellsInCurrentRow = $(currentTableRow).find('td');
     var currentTableCell = tableCellsInCurrentRow[CurrentArrayPosition[CUR_ARRAY_X]];
-    $(currentTableCell).append('<img src="/images/paint-brush-icon.png" width="' + (parseInt(cellWidth,10)-12) 
-                             + '" height="' + (parseInt(cellWidth,10)-12) + '"></img>')
+    return currentTableCell;
 };
 
 function paintCurrentSquare() {
-    // TODO
     // paint square at CurrentArrayPosition to be CurrentPenColor
+    var currentTableCell = getCurrentTableCell();
+    $(currentTableCell).removeClass();
+    $(currentTableCell).addClass(PenColors[CurrentPenColor]);
 };
 
 function resetPenColor() {
@@ -90,7 +97,12 @@ function nextPenColor() {
 };
 
 function resetTable() {
-
+    var height = PictureArray.length;
+    var width = PictureArray[0].length;
+    createPictureArray(height,width);
+    resetArrayPosition();
+    resetPenColor();
+    createNewTable(height,width);
 };
 
 function createNewTable(h, w) {
@@ -102,7 +114,7 @@ function createNewTable(h, w) {
         var newRow = '<tr>';
 
         for(var j = 0; j < w; j++) {
-            newRow += '<td style="padding: 0px; text-align: center; padding-top: 5px"></td>';
+            newRow += '<td style="padding: 0px; text-align: center; padding-top: 6px"></td>';
         }
 
         newRow += '</tr>';
@@ -112,13 +124,32 @@ function createNewTable(h, w) {
     updatePaintBrushIcon();
 };
 
-function resizeTableToSquares() {
+function getCellWidth() {
     var theTable = $('#the-table');
     var allTableRows = theTable.find('tr');
     var allTableDataCells = theTable.find('td');
     var cellWidth = $(allTableDataCells[0]).css('width');
+    return cellWidth;
+};
 
+function resizeTableToSquares() {
+    var cellWidth = getCellWidth();
+    var allTableRows = $('#the-table').find('tr');
     for(var i = 0; i < allTableRows.length; i++) {
         $(allTableRows[i]).css('height', cellWidth);
     }
+};
+
+function submitNewTableForm() {
+    var height = $('#num_rows').val();
+    var width = $('#num_cols').val();
+    if(!(height == '' || width == '')) {
+        createNewTable(height,width);
+        resetArrayPosition();
+        resetPenColor();
+    } else {
+        Materialize.toast('Uh-oh, you forgot to enter a size!', 2000);
+    }
+    $('#num_rows').val('');
+    $('#num_cols').val('');
 };

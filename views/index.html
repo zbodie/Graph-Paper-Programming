@@ -12,10 +12,64 @@
         <link type="image/x-icon" href="/images/favicon.png" rel="icon">
     </head>
     <body>
+        <!-- Navbar Structure -->
+        <nav class="gpp-blue">
+            <div class="nav-wrapper">
+            <a href="#" class="brand-logo">&nbsp;Graph Paper Programming</a>
+            </div>
+        </nav>
+
+        <!-- Grid Structure -->
         <div class="row">
-            <div class="col s6 push-s3">
+            <div class="col s12 m10 l8 push-l2 push-m1">
                 <table id="the-table" class="bordered" style="table-layout: fixed">
                 </table>
+            </div>
+        </div>
+
+        <!-- Fixed Action Button Structure -->
+        <div class="fixed-action-btn" style="bottom: 40px; right: 24px;">
+            <a class="btn-floating btn-large red">
+                <i class="large material-icons">mode_edit</i>
+            </a>
+            <ul>
+                <li><a class="btn-floating red modal-trigger" href="#modal1"><i class="material-icons">info_outline</i></a></li>
+                <li><a class="btn-floating green" onclick="resetTable();"><i class="material-icons">replay</i></a></li>
+                <li><a class="btn-floating blue modal-trigger" href="#modal2"><i class="material-icons">note_add</i></a></li>
+            </ul>
+        </div>
+
+        <!-- Modal1 Structure -->
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <h4>Instructions</h4>
+                <p>Arrow Keys - Move Brush</p>
+                <p>Shift      - Change Color</p>
+                <p>Spacebar   - Paint Current Square</p>
+            </div>
+        </div>
+
+        <!-- Modal2 Structure -->
+        <div id="modal2" class="modal">
+            <div class="modal-content">
+                <h4>Create New Grid</h4>
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="num_rows" type="number" class="validate">
+                                <label for="num_rows">Height</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="num_cols" type="number" class="validate">
+                                <label for="num_cols">Width</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a onclick="submitNewTableForm();" class="modal-action modal-close waves-effect waves-green btn-flat ">Create</a>
             </div>
         </div>
     </body>
@@ -38,5 +92,9 @@ $(document).keyup(function(event) {
     } else if(event.keyCode == 16) { // shift
         nextPenColor();
     }
+});
+$(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal-trigger').leanModal();
 });
 </script>

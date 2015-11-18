@@ -5,3 +5,11 @@ table {
 table.bordered>tbody>tr>td {
   border: 1px solid #d0d0d0;
 }
+
+.gpp-blue {
+  background-color: #00ADBB !important;
+}
+
+.gpp-purple {
+  background-color: #7866A1 !important;
+}
