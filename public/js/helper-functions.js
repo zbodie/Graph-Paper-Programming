@@ -1,5 +1,6 @@
 var PictureArray = null;
 var PenColors = ['black', 'blue-grey lighten-2'];
+var BruchIconImages = ['/images/paint-brush-icon-black.png', '/images/paint-brush-icon-grey.png']
 var CurrentPenColor = 0;
 var CurrentArrayPosition = [0,0];
 var CUR_ARRAY_X = 1;
@@ -66,8 +67,8 @@ function updatePaintBrushIcon() {
     // place new paint brush at CurrentArrayPosition
     var cellWidth = getCellWidth();
     var currentTableCell = getCurrentTableCell();
-    $(currentTableCell).append('<img src="/images/paint-brush-icon.png" width="' + (parseInt(cellWidth,10)-15) 
-                             + '" height="' + (parseInt(cellWidth,10)-15) + '"></img>')
+    $(currentTableCell).append('<img src="' + BruchIconImages[CurrentPenColor] + '" width="' + (parseInt(cellWidth,10)*.65) 
+                             + '" height="' + (parseInt(cellWidth,10)*.65) + '"></img>')
 };
 
 function getCurrentTableCell() {
@@ -94,6 +95,7 @@ function nextPenColor() {
     if(CurrentPenColor >= PenColors.length) {
         resetPenColor();
     }
+    updatePaintBrushIcon();
 };
 
 function resetTable() {
@@ -144,9 +146,9 @@ function submitNewTableForm() {
     var height = $('#num_rows').val();
     var width = $('#num_cols').val();
     if(!(height == '' || width == '')) {
-        createNewTable(height,width);
         resetArrayPosition();
         resetPenColor();
+        createNewTable(height,width);
     } else {
         Materialize.toast('Uh-oh, you forgot to enter a size!', 2000);
     }
