@@ -1,5 +1,7 @@
 # Graph-Paper-Programming
-This is an interactive tool for verifying graphs from the Graph Paper Programming from Hour of Code
+This is an interactive tool for verifying graphs from the Hour of Code Activity: Graph Paper Programming.  
+  
+https://studio.code.org/unplugged/unplug3.pdf
 
 
 ## Prerequisites
