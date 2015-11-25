@@ -1,6 +1,6 @@
 var PictureArray = null;
 var PenColors = ['black', 'blue-grey lighten-2'];
-var BruchIconImages = ['/images/paint-brush-icon-black.png', '/images/paint-brush-icon-grey.png']
+var BruchIconImages = ['/Graph-Paper-Programming/public/images/paint-brush-icon-black.png', '/Graph-Paper-Programming/public/images/paint-brush-icon-grey.png']
 var CurrentPenColor = 0;
 var CurrentArrayPosition = [0,0];
 var CUR_ARRAY_X = 1;
