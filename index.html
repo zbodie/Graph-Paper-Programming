@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Graph Paper Programming</title>
+        <link rel="stylesheet" href="/public/css/style.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!--<script type='text/javascript' src='/jquery/dist/jquery.min.js'></script>-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+        <!--<link rel="stylesheet" href="/materialize/dist/css/materialize.min.css" />-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+        <!--<script type='text/javascript' src='/materialize/dist/js/materialize.min.js'></script>-->
+        <script type='text/javascript' src='/public/js/helper-functions.js'></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link type="image/x-icon" href="/public/images/favicon.png" rel="icon">
+    </head>
+    <body>
+        <!-- Navbar Structure -->
+        <nav class="gpp-blue">
+            <div class="nav-wrapper">
+            <a href="#" class="brand-logo center">Graph Paper Programming</a>
+            </div>
+        </nav>
+
+        <!-- Grid Structure -->
+        <div class="row">
+            <div class="col s12 m8 l6 push-l3 push-m2">
+                <table id="the-table" class="bordered" style="table-layout: fixed">
+                </table>
+            </div>
+        </div>
+
+        <!-- Fixed Action Button Structure -->
+        <div class="fixed-action-btn" style="bottom: 40px; right: 24px;">
+            <a class="btn-floating btn-large red">
+                <i class="large material-icons">mode_edit</i>
+            </a>
+            <ul>
+                <li><a class="btn-floating red modal-trigger" href="#modal1"><i class="material-icons">info_outline</i></a></li>
+                <li><a class="btn-floating green" onclick="resetTable();"><i class="material-icons">replay</i></a></li>
+                <li><a class="btn-floating blue modal-trigger" href="#modal2"><i class="material-icons">note_add</i></a></li>
+            </ul>
+        </div>
+
+        <!-- Modal1 Structure -->
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <h4>Instructions</h4>
+                <p>Arrow Keys - Move Brush</p>
+                <p>Shift      - Change Color</p>
+                <p>Spacebar   - Paint Current Square</p>
+            </div>
+        </div>
+
+        <!-- Modal2 Structure -->
+        <div id="modal2" class="modal">
+            <div class="modal-content">
+                <h4>Create New Grid</h4>
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="num_rows" type="number" class="validate">
+                                <label for="num_rows">Height</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="num_cols" type="number" class="validate">
+                                <label for="num_cols">Width</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a onclick="submitNewTableForm();" class="modal-action modal-close waves-effect waves-green btn-flat ">Create</a>
+            </div>
+        </div>
+    </body>
+</html>
+
+<script>
+createNewTable(4,4);
+$(document).keyup(function(event) {
+    console.log(event);
+    if(event.keyCode == 37) { // left arrow
+        moveArrayPosition('left');
+    } else if(event.keyCode == 38) { // up arrow
+        moveArrayPosition('up');
+    } else if(event.keyCode == 39) { // right arrow
+        moveArrayPosition('right');
+    } else if(event.keyCode == 40) { // down arrow
+        moveArrayPosition('down');
+    } else if(event.keyCode == 32) { // spacebar
+        paintCurrentSquare();
+    } else if(event.keyCode == 16) { // shift
+        nextPenColor();
+    }
+});
+$(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal-trigger').leanModal();
+});
+</script>
